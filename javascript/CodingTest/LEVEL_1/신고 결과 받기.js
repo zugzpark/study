@@ -2,7 +2,7 @@ function solution(id_list, report, k) {
 
     let reportObj = new Map();
 
-    //* 테크니션 연습
+    //* Array destructuring 테크니션 연습
     id_list.forEach(val => {
         (reportObj[val] = {
             report: [],
