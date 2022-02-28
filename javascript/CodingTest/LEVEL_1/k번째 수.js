@@ -6,7 +6,6 @@ function solution(array, commands) {
     
     // sort((a,b) => a-b) 를 해주지 않으면 유니코드 정렬이라 80이 9 보다 앞에 올 수 있음.
     // compareFunction을 제공하지 않으면 요소를 문자열로 변환하고 유니코드 코드포인트 순서로 문자열을 비교하여 정렬됨
-    // 
 
     var answer = [];
     let count=0;
