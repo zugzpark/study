@@ -2,6 +2,8 @@ function solution(left, right) {
     var answer = 0;
     let count = 0;
 
+    //제곱근을 활용해볼것
+
     for(var i=left ; i<=right ; i++){
         for(var j=1 ; j<=i ; j++){
             if(i%j==0){
