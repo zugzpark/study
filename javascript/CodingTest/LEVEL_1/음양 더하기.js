@@ -1,7 +1,7 @@
 function solution(absolutes, signs) {
     
     // *reduce() 숙지
-
+    //
     var answer = 0;
 
     for (let i = 0; i < signs.length; i++) {
