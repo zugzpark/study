@@ -28,6 +28,7 @@ function baseBall() {
 function challenge() {
     rl.question(`${gameNum}번째 시도 : `, (answer) => {
         let [num1, num2, num3] = answer.split('');
+
         
         if (answer.length !== 3 ||
             isNaN(Number(answer)) ||
@@ -77,14 +78,15 @@ function challenge() {
 
 function randomNum() {
     let result = '';
-    let num = Math.floor(Math.random() * 10);
 
     while (result.length != 3) {
 
-        while (result.includes(num)) {
-            num = Math.floor(Math.random() * 10);
+        let num = Math.floor(Math.random() * 10);
+
+        if (!result.includes(num)) {
+            result += num;
         }
-        result += num;
+
 
     }
     return result;
