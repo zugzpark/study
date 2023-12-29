@@ -7,7 +7,12 @@ const router = express.Router();
  * 1. 회원 전체 조회
  */
 router.get("/user", async (req, res) => {
-  const data = await member.find({});
+  const data = await member.find({},{
+    userId:"$_id",
+    name:"$name",
+    email:"$email",
+    pw:"$pw",
+  _id:false});
 
   res.send(data);
 });
@@ -18,14 +23,8 @@ router.get("/user", async (req, res) => {
 router.get("/user/:userId", async (req, res) => {
   const { id } = req.params;
 
-  const data = await member.find(
-    { userId: id },
-    {
-      userId: "$userId",
-      name: "$name",
-      emial: "$email",
-      pw: "$pw",
-    }
+  const data = await member.findOne(
+    { userId : id}
   );
 
   return res.status(200).json(data);

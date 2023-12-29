@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Comments {
+  id        Int      @id @default(autoincrement()) @map("id")
+  reviewId  Int      @map("reviewId")
+  author    String   @map("author")
+  password  String   @map("password")
+  content   String   @map("content")
+  createdAt DateTime @default(now()) @map("createdAt")
+  updatedAt DateTime @default(now()) @map("updatedAt")
+
+  @@map("Comments")
+}
+
+model Reviews {
+  id         Int      @id @default(autoincrement()) @map("id")
+  bookTitle  String @map("bookTitle")
+  title      String   @db.Text @map("title")
+  starRating String @map("starRating")
+  content    String @map("content")
+  author     String @map("author")
+  password   String @map("password")
+  createdAt  DateTime @default(now()) @map("createdAt")
+  updatedAt  DateTime @default(now()) @map("updatedAt")
+}
