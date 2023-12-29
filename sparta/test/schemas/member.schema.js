@@ -16,6 +16,6 @@ const memberSchema = new mongoose.Schema({
 memberSchema.virtual("userId").get(function () {
   return this._id.toHexString();
 });
-memberSchema.set('toJSON',{virtuals:true})
+
 
 export default mongoose.model("member", memberSchema);
