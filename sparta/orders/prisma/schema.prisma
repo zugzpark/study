@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Categories {
+  id     Int     @id @default(autoincrement()) @map("id")
+  name   String @map("name")
+  orders Int @map("orders")
+  Menu   Menu[]
+  updateAt DateTime @map("updateAt")
+
+  @@map("Categories")
+}
+
+model Menu {
+  id            Int         @id @default(autoincrement()) @map("menuId")
+  name          String @map("menuName")
+  description String @db.Text @map("description")
+  image         String @map("image")
+  price         Int @map("price")
+  orders        Int @map("menuOrder")
+  status        menuStatus @default(FOR_SALE) @map("status")
+  categories_id Int?
+  Categories    Categories? @relation(fields: [categories_id], references: [id], onDelete: Cascade)
+  updateAt DateTime @map("menuUpdateAt")
+
+  @@map("Menu")
+}
+
+
+enum menuStatus{
+  FOR_SALE
+  SOLD_OUT
+}
