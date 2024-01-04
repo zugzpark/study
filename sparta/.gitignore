@@ -3,6 +3,8 @@ node_modules
 /spa-shop
 
 
+.env
+
 #IDE
 .vscode/*
 /.vscode
