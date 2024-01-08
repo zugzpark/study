@@ -7,13 +7,25 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Users {
+  id Int @id @default(autoincrement()) @map("@userId")
+  nickname String @map("nickname")
+  password String @map("password")
+  usertype userType @default(CUSTOMER) @map("userType")
+  createdAt DateTime @default(now()) @map("createdAt")
+  updatedAt DateTime @updatedAt @map("updatedAt")
+    
+  @@map("Users")
+
+}
+
 model Categories {
   id     Int     @id @default(autoincrement()) @map("id")
   name   String @map("name")
   orders Int @map("orders")
   Menu   Menu[]
   updateAt DateTime @map("updateAt")
-
+  
   @@map("Categories")
 }
 
@@ -36,4 +48,10 @@ model Menu {
 enum menuStatus{
   FOR_SALE
   SOLD_OUT
+}
+
+
+enum userType{
+  CUSTOMER
+  OWNER
 }
