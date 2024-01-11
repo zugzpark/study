@@ -4,8 +4,7 @@ const router = express.Router();
 
 //게시글을 작성하는 API
 const createNewPost = async (req, res) => {
-  /** (구현) **/
-  const { title, content } = req.body;
+    const { title, content } = req.body;
 
   const post = new Post({
     title: title,
