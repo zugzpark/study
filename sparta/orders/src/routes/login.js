@@ -33,7 +33,7 @@ router.post("/", async (req, res, next) => {
       select: { id:true, nickname: true, password: true, usertype: true },
       where: { nickname },
     });
-    //console.log(user , user.nickname , user.id)
+    
     if (!user) {
       throw { name: "notExist", message: "닉네임" };
     } else if (!(await bcrypt.compare(password, user.password))) {
@@ -45,10 +45,7 @@ router.post("/", async (req, res, next) => {
 
     
     //토큰 발급
-    
-    const token = jwt.sign({ userId: user.id }, 'Secret_orders_Key');
-    
-    console.log(`token>>> `, token);
+    const token = jwt.sign({ userId: user.id , usertype: user.usertype }, 'Secret_orders_Key');
 
     res.cookie(
       'authorization',
