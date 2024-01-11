@@ -28,7 +28,7 @@ const userSchema = Joi.object({
 
 router.post("/sign-up", async (req, res,next) => {
   try {
-    console.log(`회원가입`, req.body)
+    
     const resultSchema = userSchema.validate(req.body);
     
     //아이디, 비밀번호 유효성 검증
@@ -37,8 +37,6 @@ router.post("/sign-up", async (req, res,next) => {
     
     const {nickname, password, usertype} = resultSchema.value
     if(password.includes(nickname)) throw { name : "ValidationError" ,message:"비밀번호"}
-    
-    console.log("회원가입 >>> ", nickname, password, usertype);
     
     const user = await prisma.users.findFirst({
       where: { nickname },
@@ -59,7 +57,6 @@ router.post("/sign-up", async (req, res,next) => {
         usertype
       },
     });
-    console.log(`${nickname} 님이 가입하셨습니다.`);
 
     return res.status(201).json({ message: "회원 가입에 성공하였습니다." });
   } catch (error) {

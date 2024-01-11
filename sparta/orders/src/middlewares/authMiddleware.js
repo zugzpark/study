@@ -1,27 +1,24 @@
-import jwt from 'jsonwebtoken';
-import { prisma } from '../utils/prisma/index.js';
-
+import jwt from "jsonwebtoken";
+import { prisma } from "../utils/prisma/index.js";
 
 export default async function (req, res, next) {
   try {
-    
-    const cookies = req.cookies['authorization'];
+    const cookies = req.cookies["authorization"];
 
-    if (!cookies) {
-      return res.status(403).json({
-        errorMessage: '로그인이 필요한 기능입니다.',
-      });
-    }
+    if (!cookies) throw { name: "needLogin" };
 
     //토큰 확인
-    const [tokenType, tokenValue] = cookies.split(' ');
-    const { userId } = jwt.verify(tokenValue, 'Secret_orders_Key');
+    const [tokenType, tokenValue] = cookies.split(" ");
+    const { userId } = jwt.verify(tokenValue, "Secret_orders_Key");
     
+    if (!cookies) throw { name: "needLogin" };
     const user = await prisma.users.findUnique({
-      where: { id: Number(userId) , usertype:'OWNER' },
+      select: { id: true, nickname: true, usertype: true },
+      where: { id: Number(userId) },
     });
-    
-    if(!user) throw { name:"No_permission"}
+
+    req.user = user;
+
     next();
   } catch (error) {
     next(error);
