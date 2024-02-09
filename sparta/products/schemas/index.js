@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const connect = () => {
   mongoose
     .connect(
-      "mongodb+srv://admin12:admin1221nimda@express-mongo.xotdd9a.mongodb.net/?retryWrites=true&w=majority",
+      process.env.DATABASE_URL,
 
       {
         dbName: "node_lv1",
