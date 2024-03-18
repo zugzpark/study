@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { CreateSampleDto } from './dto/create-sample.dto';
 import { UpdateSampleDto } from './dto/update-sample.dto';
-import { SampleService } from './sample.service';
 
 @Injectable()
-export class SampleBestService implements SampleService {
+export class SampleBestService {
   create(createSampleDto: CreateSampleDto) {
     return 'This action adds a new sample';
   }

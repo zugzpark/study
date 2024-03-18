@@ -1,21 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Inject, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { SampleService } from './sample.service';
 import { CreateSampleDto } from './dto/create-sample.dto';
 import { UpdateSampleDto } from './dto/update-sample.dto';
 
 @Controller('sample')
 export class SampleController {
-  constructor(
-    @Inject('SampleService')
-    private readonly sampleService: SampleService) {}
+  constructor(private readonly sampleService: SampleService) {}
 
   @Post()
   create(@Body() createSampleDto: CreateSampleDto) {
     return this.sampleService.create(createSampleDto);
   }
 
-  @Get(':id')
-  findAll(@Param('id', ParseIntPipe) id:number) {
+  @Get()
+  findAll() {
     return this.sampleService.findAll();
   }
 
